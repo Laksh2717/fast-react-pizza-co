@@ -37,6 +37,7 @@ export default [
       }],
       'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'warn', 
+      'react/prop-types' : 'warn',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

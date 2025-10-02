@@ -1,9 +1,5 @@
-# Building App Layout :
+# React router's data loading feature "Loaders" :
 
-- basically now we want that whatever page we are on, we want a layout for it, like a header on top and something in below, that should be rendered in every page, this is called app layout.
-- so create AppLayout in ui, and add content in it accordingly.
-- now how to connect this layout to every page i.e. route. so we have to make a parent route with no path and element your layout component. and make all routes as its children, so all its children will get this layout on their page. 
-
-* So any route with no path and only element is treated as layout route, and all its children get that layout on their page.
-
-- now in that layout, we have to render different content corresponding to the page we are on,like if we are on /cart, then render content of Cart element, if on / then render Home element etc. so we use Outlet for that. 
+- so the idea behind a loader is that somewhere in our code we create a function that fetches data from api, we then provide that loader function to one of our routes, and that route will then fetch that data as soon as application goes to that route. And then in the end, once the data has arrived, it will be provided to the page component itself using a custom hook. 
+- now to use this data loading feature, first create a loader function, and it is a convention that we create it in the same component page where we want the data to be loaded. Then import that loader in app component, and also try to change its name as we will have more than 1 loaders. then in the route, use loader. now use a hook useLoaderData to get that data and then use that data. 
+- And effectively what we just did here was to implement or to use a "render as you fetch" strategy because the nice thing about this is that React Router will actually start fetching the data at the same time as it starts rendering the correct route. So these things really happen at the same time, while what we did before using useEffect was always a "fetch on render" approach. So basically, we rendered the component first, and then after the component was already rendered is when we then would start to fetch the data. And so that would then create so-called data loading waterfalls, but not here. So here everything really happens at the same time, which is a really nice and really modern thing to do as well.
