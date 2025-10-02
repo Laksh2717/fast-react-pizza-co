@@ -1,6 +1,9 @@
-# New way of implementing routes with more features (v6.4+) :
+# Building App Layout :
 
-- install react-router-dom.
-- use createBrowserRouter function from this package and pass in an array of objects, where each object is a route. In traditional routing method using browserRouter, we define routes in a more declarative way, but here in new way of implementing routes, we have more of a imperative way to declare routes.
-- in this new method of routing, there are more features including data fetching and data loading etc. 
-- also, notice that we do not have a route for Page not found with path * at the end of all paths, because we will handle it in a new way.
+- basically now we want that whatever page we are on, we want a layout for it, like a header on top and something in below, that should be rendered in every page, this is called app layout.
+- so create AppLayout in ui, and add content in it accordingly.
+- now how to connect this layout to every page i.e. route. so we have to make a parent route with no path and element your layout component. and make all routes as its children, so all its children will get this layout on their page. 
+
+* So any route with no path and only element is treated as layout route, and all its children get that layout on their page.
+
+- now in that layout, we have to render different content corresponding to the page we are on,like if we are on /cart, then render content of Cart element, if on / then render Home element etc. so we use Outlet for that. 
