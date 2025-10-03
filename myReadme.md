@@ -1,17 +1,18 @@
-# Loading indicator :
+# Fetching order information :
 
-- Now, in order to be able to display an indicator like this, we need to know whether this data is actually being loaded right now, right? So currently, we don't have that information anywhere here yet, right? So there's no like is loading state somewhere to be seen.
+- now what we want is that when i search a order id, then i get all its information. so we have to fetch order information. so you can see that we have a getOrder function in apirestaurant. so we will be using that. 
 
-- so we will use a hook useNavigation provided by react router and with this we will be able to see whether our app is currently idle or whether it is loading data, or submitting data, and this information is actually for the entire app and not just for one page. so if one of the pages is loading, then navigation state will become loading no matter which of the page is being loaded. 
+- so first create a search field in header. make it controlled element.
 
-- so we can not create loader per page. we will just create one generic loader and use it everywhere in case of loading data. 
+- now when we write some id in search bar and hit enter, it will redirect us to that page i.e. /order/:orderId, so now what we want is to load that order id data in that page. so we will do exactly same thing which we have done in menu.
 
-# Handling errors :
+- first create a loader function in Order.jsx file. now we have to fetch information about the order using getOrder here, but getOrder needs an id.
 
-- So with create browser Router whenever there is some error that is thrown in a loader, an action, or simply while rendering a component, we can render an error element instead of these elements here that correspond to the actual pages.
+- So, how do we get the ID from the URL right into this function? so we can think of using useParams hook. However, since this is a hook it only works inside components. It doesn't work in regular functions.
 
-- so we will specify an errorElement in the parent route because the errors that happen in the nested route will bubble up to parent route. and then we will check 2 types of errors, first is go to a route that does not exist, so it will show an error message there, and then try to get an error in data fetching, so change the api url, then also you will see an error message. 
+- But, luckily for us, React Router has, of course, thought of the situation, and therefore it passes in some data into the loader function as it calls it, and one of the properties of the object that the loader function receives is exactly the params. so use it in the loader function.
 
-- but now you can notice that the error message is shown without our app layout, but we want to show error component within the layout, so we have to put error inside any of the nested route, and so we will put it in menu route, as it is most probable that an error will occur here only. 
+- now connect the loader function in the route, and read the data using useLoaderData.
 
-- So this is the very basic and most straightforward way of dealing with errors using the new React Router. So basically using the error element property that we can define on each of the routes, it's just important to notice that each of these errors here will bubble up to the parent route unless it is actually handled in the route itself. So by placing error element right on the route where the error might happen.
+- also when you run the code, you will be able to see loading indicator while the order information is being fetched. 
+
